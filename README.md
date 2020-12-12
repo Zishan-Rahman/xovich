@@ -15,3 +15,4 @@ I don't know what you will do with this, but I really enjoyed making it, so here
 ## TODO:
 - Create the GUI
 - Implement the functionality in tkinter without doing this in one line.
+- Rename master branch to main.
