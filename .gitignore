@@ -1,0 +1,4 @@
+__pycache__/ #compiled python files
+.vscode/ #vscode test automation configuration
+__init__.py #experimental
+.gitignore #omegalul
