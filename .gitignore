@@ -1,0 +1,4 @@
+.pytest_cache/ #for testing w/ pytest (potential future usage)
+__pycache__/ #compiled python files
+.vscode/ #vscode test automation configuration
+__init__.py #experimental
