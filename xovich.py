@@ -37,12 +37,10 @@ class Main(Frame):
         if messagebox.askokcancel("End","Are you sure you want to exit?!"):
             self.master.destroy()
 
-    @staticmethod
     def checkmiddleilya(self):
         """Checks whether Ilya should be added or not."""
         pass
 
-    @staticmethod
     def checksecondname(self):
         """Determines whether the second name button and/or entry field should be greyed out, depending on the user's choice."""
         pass
