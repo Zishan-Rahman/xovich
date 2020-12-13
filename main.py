@@ -17,6 +17,7 @@ class Main(Frame):
         Label(self).pack()
         Label(self, text="First name").pack()
         self.firstnamefield = Entry(self, width=35)
+        self.firstnamefield.insert(0,"Named")
         self.firstnamefield.pack()
         Label(self, text="Second name").pack()
         self.secondnamefield = Entry(self, width=35)
@@ -24,6 +25,8 @@ class Main(Frame):
         Label(self).pack()
         self.addilyabox = Checkbutton(self, text="Add \"Ilya\" in the middle")
         self.addilyabox.pack()
+        self.setfirstaslast = Checkbutton(self, text="Set last name as first name")
+        self.setfirstaslast.pack()
         Label(self).pack()
         self.processbutton = Button(self, text="Confirm selection")
         self.processbutton.pack()
@@ -40,7 +43,7 @@ def createGUI():
     """Creates the, well, GUI!"""
     root = Tk()
     root.title("Xovich")
-    root.geometry("500x300")
+    root.geometry("500x325")
     xovich = Main(root)
     root.mainloop()
 
