@@ -1,5 +1,11 @@
+"""
+The Xovich Program:
+- Enables the user to add "ovich" at the end of their name!
+"""
+
 from tkinter import *
 from tkinter import messagebox#, font
+
 
 class Main(Frame):
     """The GUI"""
@@ -20,7 +26,7 @@ class Main(Frame):
         self.firstnamefield.insert(0,"Example")
         self.firstnamefield.pack()
         Label(self, text="Last name").pack()
-        self.lastnamefield = Entry(self, width=35)
+        self.lastnamefield = Entry(self, width=35, state=NORMAL)
         self.lastnamefield.insert(0, "Named")
         self.lastnamefield.pack()
         Label(self).pack()
@@ -28,10 +34,11 @@ class Main(Frame):
         self.addilyabox = Checkbutton(self, text="Add \"Ilya\" in the middle", variable=self.ilya)
         self.addilyabox.pack()
         self.fal = IntVar()
-        self.setfirstaslast = Checkbutton(self, text="Set last name as first name", command=self.greyout, state=NORMAL, variable=self.fal)
+        self.setfirstaslast = Checkbutton(self, text="Set last name as first name", command=self.greyout, variable=self.fal)
         self.setfirstaslast.pack()
         Label(self).pack()
-        Button(self, text="Confirm selection", command=self.confirm_makeovich).pack()
+        self.processbutton = Button(self, text="Confirm selection", command=self.showmakeovich)
+        self.processbutton.pack()
 
     def greyout(self):
         """Greys out the "last name" field if the user wants it to be the same as their first name"""
@@ -43,13 +50,12 @@ class Main(Frame):
 
     def confirmclosure(self):
         """Asks the user if they really want to close the program (before actually closing it)"""
-        if messagebox.askyesno("End","Are you sure you want to exit?!"):
+        if messagebox.askyesno("End","Are you sure you want to exit?!", icon="warning"):
             self.master.destroy()
 
-    def confirm_makeovich(self):
-        """Checks if the user wants \"Ilya\" in the middle of their name"""
-        if messagebox.askyesno("Confirm Xovich Processing", "Are you sure you want to try the Xovich program?\nClick \"Cancel\" to go back and change it."):
-            messagebox.showinfo("New name", f"Your new name is {self.makeovich()}!")
+    def showmakeovich(self):
+        """Does the actual processing!"""
+        messagebox.showinfo("New name", f"Your new name is {self.makeovich()}!")
 
     def makeovich(self):
         """The function for actually making the new name"""
@@ -58,14 +64,20 @@ class Main(Frame):
             lastname = firstname
         else:
             lastname = self.lastnamefield.get()
-        if self.ilya.get() == 1:
+        if self.ilya.get() == 1 and len(firstname) != 0:
             newname = firstname + " Ilya " + lastname
         elif len(firstname) != 0 and len(lastname) != 0:
             newname = firstname + " " + lastname
+        elif len(firstname) != 0 and len(lastname) != 0 and self.ilya.get() == 1:
+            newname = "Ilya I Don't Got No Name"
+        elif len(firstname) == 0 and self.ilya.get() == 1:
+            newname = "Ilya " + lastname
         elif len(firstname) == 0:
             newname = lastname
         elif len(lastname) == 0:
             newname = firstname
+        else:
+            newname = "I Don't Got No Name"
         newname += "ovich"
         #print(newname)
         return newname
@@ -80,7 +92,7 @@ def createGUI():
     root.title("Xovich")
     root.geometry("500x325")
     xovich = Main(root)
-    return root
+    return xovich
 
 if __name__ == "__main__":
     """What to run when executed"""
