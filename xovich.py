@@ -17,43 +17,62 @@ class Main(Frame):
         Label(self).pack()
         Label(self, text="First name").pack()
         self.firstnamefield = Entry(self, width=35)
-        self.firstnamefield.insert(0,"Named")
+        self.firstnamefield.insert(0,"Example")
         self.firstnamefield.pack()
-        Label(self, text="Second name").pack()
-        self.secondnamefield = Entry(self, width=35)
-        self.secondnamefield.pack()
+        Label(self, text="Last name").pack()
+        self.lastnamefield = Entry(self, width=35)
+        self.lastnamefield.insert(0, "Named")
+        self.lastnamefield.pack()
         Label(self).pack()
-        self.is_ilya = False
-        self.addilyabox = Checkbutton(self, text="Add \"Ilya\" in the middle", variable=self.is_ilya)
+        self.ilya = IntVar()
+        self.addilyabox = Checkbutton(self, text="Add \"Ilya\" in the middle", variable=self.ilya)
         self.addilyabox.pack()
-        self.setfirstaslast = Checkbutton(self, text="Set last name as first name")
+        self.fal = IntVar()
+        self.setfirstaslast = Checkbutton(self, text="Set last name as first name", command=self.greyout, state=NORMAL, variable=self.fal)
         self.setfirstaslast.pack()
         Label(self).pack()
-        self.processbutton = Button(self, text="Confirm selection")
-        self.processbutton.pack()
+        Button(self, text="Confirm selection", command=self.confirm_makeovich).pack()
+
+    def greyout(self):
+        """Greys out the "last name" field if the user wants it to be the same as their first name"""
+        #print(self.fal.get())
+        if self.fal.get() == 1:
+            self.lastnamefield.config(state=DISABLED)
+        else:
+            self.lastnamefield.config(state=NORMAL)
 
     def confirmclosure(self):
         """Asks the user if they really want to close the program (before actually closing it)"""
-        if messagebox.askokcancel("End","Are you sure you want to exit?!"):
+        if messagebox.askyesno("End","Are you sure you want to exit?!"):
             self.master.destroy()
 
-    def checkmiddleilya(self):
-        """Checks whether Ilya should be added or not."""
-        pass
+    def confirm_makeovich(self):
+        """Checks if the user wants \"Ilya\" in the middle of their name"""
+        if messagebox.askyesno("Confirm Xovich Processing", "Are you sure you want to try the Xovich program?\nClick \"Cancel\" to go back and change it."):
+            messagebox.showinfo("New name", f"Your new name is {self.makeovich()}!")
 
-    def checksecondname(self):
-        """Determines whether the second name button and/or entry field should be greyed out, depending on the user's choice."""
-        pass
-
-    def makeovich(self, name, if_ilya):
+    def makeovich(self):
         """The function for actually making the new name"""
-        pass
+        firstname = self.firstnamefield.get()
+        if self.lastnamefield.cget('state') == DISABLED:
+            lastname = firstname
+        else:
+            lastname = self.lastnamefield.get()
+        if self.ilya.get() == 1:
+            newname = firstname + " Ilya " + lastname
+        elif len(firstname) != 0 and len(lastname) != 0:
+            newname = firstname + " " + lastname
+        elif len(firstname) == 0:
+            newname = lastname
+        elif len(lastname) == 0:
+            newname = firstname
+        newname += "ovich"
+        #print(newname)
+        return newname
 
 """TODO
-Create the actual processing functions
-Implement the Ivanovich program in Tkinter
 Change the font view on tkinter to something either better or worse
-Devise some unit tests"""
+Devise some unit tests and try to automate the creation of names for unit testing purposes"""
 
 def createGUI():
     """Creates the, well, GUI!"""
