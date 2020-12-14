@@ -9,7 +9,7 @@ Kabilan's best friend was cold-texted by a random number. This person was presum
 He then advised his best friend to change his name _very_ slightly. Whereby his surname is his first name, with "ovich" concatenated to it.
 This was a simple task, so to test their patience, and their Python programming skills, they initially endeavoured to do this in one line. They eventually managed to do it in one afternoon at a Starbucks, and, without knowing what anyone would do with it, released it as a gift to the so-called "interwebs".
 
-Three months later, his _other_ best friend (aka me) came across his one-line program
+Three months later, his _other_ best friend (aka me) came across his one-line program, and I need to complete this paragraph later.
 
 ## TODO
 
