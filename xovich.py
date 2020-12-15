@@ -67,10 +67,12 @@ class Main(Frame):
             newname = firstname + " Ilya " + lastname
         elif len(firstname) != 0 and len(lastname) != 0:
             newname = firstname + " " + lastname
-        elif len(firstname) != 0 and len(lastname) != 0 and self.ilya.get() == 1:
+        elif len(firstname) == 0 and len(lastname) == 0 and self.ilya.get() == 1:
             newname = "Ilya I Don't Got No Name"
         elif len(firstname) == 0 and self.ilya.get() == 1:
             newname = "Ilya " + lastname
+        elif len(firstname) + len(lastname) == 0:
+            newname = "I Don't Got No Name"
         elif len(firstname) == 0:
             newname = lastname
         elif len(lastname) == 0:
@@ -81,9 +83,7 @@ class Main(Frame):
         #print(newname)
         return newname
 
-"""TODO
-Change the font view on tkinter to something either better or worse
-Devise some unit tests and try to automate the creation of names for unit testing purposes"""
+"""TODO: Fix the if-statements to make sure they return results that I like. Also, make more unit tests."""
 
 def createGUI():
     """Creates the, well, GUI!"""
