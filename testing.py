@@ -1,3 +1,7 @@
+"""
+For creating several unit tests for the Xovich program.
+"""
+
 import unittest
 #import mock
 from xovich import *
@@ -10,11 +14,8 @@ class TestXovich(unittest.TestCase):
         self.roor = createGUI()
         return super().setUp()
 
-    # def testMakeGUI(self):
-    #     self.roor.mainloop()
-
-    def testMakeName(self):
-        """Makes some names then tests to see if they come out right. TEST 1"""
+    def test1_MakeName(self):
+        """TEST 1. EXPECTED: \"Play Ilya Testovich\""""
         #self.testMakeGUI()
         self.roor.firstnamefield.delete(0,END)
         self.roor.firstnamefield.insert(0,"Play")
@@ -23,34 +24,31 @@ class TestXovich(unittest.TestCase):
         self.roor.addilyabox.invoke()
         #self.roor.setfirstaslast.invoke()
         self.assertEqual(self.roor.makeovich(),"Play Ilya Testovich")
-        self.roor.processbutton.invoke()
-        self.roor.master.destroy()
+        #self.roor.processbutton.invoke()
 
-    def testMakeNameWithNothing(self):
-        """Makes some names then tests to see if they come out right. TEST 2"""
+    def test2_MakeNameWithNothing(self):
+        """TEST 2. EXPECTED: \"I Don't Got No Nameovich\" then \"Ilya I Don't Got No Nameovich\""""
         self.roor.firstnamefield.delete(0,END)
         self.roor.lastnamefield.delete(0,END)
         self.assertEqual(self.roor.makeovich(),"I Don't Got No Nameovich")
-        self.roor.processbutton.invoke()
+        #self.roor.processbutton.invoke()
         self.roor.addilyabox.invoke()
         self.assertEqual(self.roor.makeovich(),"Ilya I Don't Got No Nameovich")
-        self.roor.processbutton.invoke()
-        self.roor.master.destroy()
+        #self.roor.processbutton.invoke()
 
-    def testMakeNameSameFirstName(self):
-        """Makes some names then tests to see if they come out right. TEST 3"""
+    def test3_MakeNameSameFirstName(self):
+        """TEST 3. EXPECTED: \"Testing Ilya Testingovich\""""
         self.roor.firstnamefield.delete(0,END)
         self.roor.firstnamefield.insert(0,"Testing")
         self.roor.addilyabox.invoke()
         self.roor.setfirstaslast.invoke()
         self.assertEqual(self.roor.makeovich(),"Testing Ilya Testingovich")
-        self.roor.processbutton.invoke()
-        self.roor.master.destroy()
+        #self.roor.processbutton.invoke()
 
     def tearDown(self):
         """Cleans up the test area after it's done"""
         try:
-            self.roor.destroy()
+            self.roor.master.destroy()
         except:
             pass
         return super().tearDown()

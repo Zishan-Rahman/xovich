@@ -1,6 +1,5 @@
 """
-The Xovich Program:
-- Enables the user to add "ovich" at the end of their name!
+The Xovich program enables the user to add "ovich" at the end of their name!
 """
 
 from tkinter import *
